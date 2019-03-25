@@ -62,3 +62,21 @@ numInput.addEventListener("change", function(){
 	winningScore = Number(this.value);
 	reset();
 });
+
+var lis = document.querySelectorAll("li");
+
+// Uses a loop to set up the events.
+for(var i = 0; i < lis.length; i++){
+	// Changes list item color to purple when mouse hovers over the list item.
+	lis[i].addEventListener("mouseover", function(){
+		this.classList.add("selected");
+	});
+	// Changes list item color back to black when mouse leaves the list item.
+	lis[i].addEventListener("mouseout", function(){
+		this.classList.remove("selected");
+	});
+	// Crosses out list item and changes font color to gray when list item is clicked.
+	lis[i].addEventListener("click", function(){
+		this.classList.toggle("done");	
+	});
+}
