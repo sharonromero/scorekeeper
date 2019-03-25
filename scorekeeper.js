@@ -3,6 +3,8 @@ var p2Button = document.getElementById("p2");
 var resetButton = document.getElementById("reset");
 var p1Display = document.querySelector("#p1Display");
 var p2Display = document.querySelector("#p2Display");
+var numInput  = document.querySelector("input");
+var winningScoreDisplay = document.querySelector("p span");
 var p1Score = 0;
 var p2Score = 0;
 // gameOver starts as false because gameOver is not true at the beginning of the game.
@@ -37,6 +39,10 @@ p2Button.addEventListener("click", function(){
 
 // Resets the score to 0 and removes the winner class from the score so the score doesn't stay green.
 resetButton.addEventListener("click", function(){
+	reset(); 
+});
+
+function reset(){
 	p1Score = 0;
 	p2Score = 0;
 	p1Display.textContent = 0;
@@ -45,5 +51,14 @@ resetButton.addEventListener("click", function(){
 	p2Display.classList.remove("winner");
 	// Sets gameOver to false so we can play the game again without refreshing the browser. 
 	// If this isn't there then the Player One and Player Two buttons don't work unless we refresh the browser.
-	gameOver = false; 
+	gameOver = false;
+}
+
+// Used change event instead of click event because if the user types a number into the box manually, it didn't work properly, no event is fired.
+// Change runs anytime the value changes. It doesn't matter how that value is changed, whether it's manually or using the little up and down arrows in the box.
+// this in code below, refers to whatever the event was listening on, which in this case, is numInput. Could also just write numInput instead of this (e.g. numInput.value).
+numInput.addEventListener("change", function(){
+	winningScoreDisplay.textContent = this.value;
+	winningScore = Number(this.value);
+	reset();
 });
